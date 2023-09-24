@@ -1,7 +1,11 @@
+import { Books } from '@prisma/client';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { paginationFields } from '../../../constants/pagination';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
+import { bookFilterableFields } from './books.constant';
 import { BookService } from './books.service';
 
 const createBook = catchAsync(async (req: Request, res: Response) => {
@@ -15,13 +19,29 @@ const createBook = catchAsync(async (req: Request, res: Response) => {
   });
 });
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
-  const result = await BookService.getAllBooks();
+  const filters = pick(req.query, bookFilterableFields);
+  const options = pick(req.query, paginationFields);
 
-  sendResponse(res, {
+  const result = await BookService.getAllBooks(filters, options);
+  sendResponse<Partial<Books[]>>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Retrive Books Successfully',
-    data: result,
+    message: 'Books fetched successfully',
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
+const getBooksByCategory = catchAsync(async (req: Request, res: Response) => {
+  const { categoryId } = req.params;
+
+  const result = await BookService.getBooksByCategory(categoryId);
+  sendResponse<Partial<Books[]>>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Books with associated category data fetched successfully',
+    meta: result.meta,
+    data: result.data,
   });
 });
 const getBookById = catchAsync(async (req: Request, res: Response) => {
@@ -61,4 +81,5 @@ export const BookController = {
   getBookById,
   deleteBook,
   updateBook,
+  getBooksByCategory,
 };

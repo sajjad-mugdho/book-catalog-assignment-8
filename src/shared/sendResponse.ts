@@ -1,13 +1,14 @@
 import { Response } from 'express';
 
 type IApiReponse<T> = {
-  statusCode: number;
   success: boolean;
+  statusCode: number;
   message?: string | null;
   meta?: {
     page: number;
-    limit: number;
+    size: number;
     total: number;
+    totalPage: number;
   };
   data?: T | null;
 };

@@ -38,7 +38,28 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const refreshToken = catchAsync(async (req: Request, res: Response) => {
+  const { refreshToken } = req.cookies;
+  const result = await AuthService.refreshToken(refreshToken);
+
+  // set refresh token into cookie
+  const cookieOptions = {
+    secure: config.env === 'production',
+    httpOnly: true,
+  };
+
+  res.cookie('refreshToken', refreshToken, cookieOptions);
+
+  res.status(200).send({
+    success: true,
+    statusCode: 200,
+    message: 'User signin successfully!',
+    token: result,
+  });
+});
+
 export const AuthController = {
   insertIntoDB,
   loginUser,
+  refreshToken,
 };
