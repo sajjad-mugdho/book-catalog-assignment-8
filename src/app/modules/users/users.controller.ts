@@ -1,16 +1,23 @@
+import { Users } from '@prisma/client';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { paginationFields } from '../../../constants/pagination';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
+import { userFilterableFields } from './users.constant';
 import { UsersService } from './users.service';
 
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-  const result = await UsersService.getAllUsers();
+  const filters = pick(req.query, userFilterableFields);
+  const paginationOptions = pick(req.query, paginationFields);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
+  const result = await UsersService.getAllUsers(filters, paginationOptions);
+
+  sendResponse<Partial<Users>[]>(res, {
     success: true,
-    message: 'Users Retrive SuccsessFully',
+    statusCode: httpStatus.OK,
+    message: 'Users retrieved successfully !',
     data: result,
   });
 });
