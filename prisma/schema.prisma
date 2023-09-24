@@ -22,3 +22,10 @@ model Users {
 
   @@map("users")
 }
+
+model Category {
+  id    String @id @default(uuid())
+  title String
+
+  @@map("category")
+}
