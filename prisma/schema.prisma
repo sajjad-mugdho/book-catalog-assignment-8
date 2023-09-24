@@ -42,7 +42,6 @@ model Books {
   category        Category          @relation(fields: [categoryId], references: [id])
   categoryId      String
   ReviewAndRating ReviewAndRating[]
-  orderedBooks    OrderedBook[]
 
   @@map("book")
 }
@@ -70,10 +69,10 @@ model Order {
 }
 
 model OrderedBook {
-  id       String @id @default(uuid())
-  orderId  String
-  bookId   String
-  book     Books  @relation(fields: [bookId], references: [id])
+  id      String @id @default(uuid())
+  orderId String
+  bookId  String
+
   quantity Int
 
   order Order @relation(fields: [orderId], references: [id])

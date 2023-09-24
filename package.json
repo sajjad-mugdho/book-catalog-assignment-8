@@ -1,5 +1,8 @@
 {
     "name": "book-catelog-assignment-8",
+    "licenses": [
+        "ics"
+    ],
     "version": "1.0.0",
     "description": "",
     "module": "",
