@@ -33,12 +33,14 @@ const getAllOrder = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-const getOrderById = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderService.getOrderById(req.params.id);
+const getOrderByOrderId = catchAsync(async (req: Request, res: Response) => {
+  const user: IUser = (req as any).user;
+  const orderId = req.params.orderId;
+  const result = await OrderService.getOrderByOrderId(user, orderId);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Order Retrives succsefully',
+    message: 'Order retrieved successfully !',
     data: result,
   });
 });
@@ -46,5 +48,5 @@ const getOrderById = catchAsync(async (req: Request, res: Response) => {
 export const OrderController = {
   getAllOrder,
   createOrder,
-  getOrderById,
+  getOrderByOrderId,
 };

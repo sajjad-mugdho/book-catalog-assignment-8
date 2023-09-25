@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Order } from '@prisma/client';
+
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { IUser } from '../../../interfaces/common';
@@ -111,22 +111,56 @@ const getAllOrder = async (user: IUser): Promise<any[]> => {
     return result;
   }
 };
-const getOrderById = async (id: string): Promise<Order | null> => {
-  const result = await prisma.order.findUnique({
-    where: {
-      id,
-    },
-  });
+const getOrderByOrderId = async (
+  user: IUser,
+  orderId: string
+): Promise<any | null> => {
+  const { userId, role } = user;
 
-  return result;
-};
-const getOrderForCustomer = () => {
-  console.log('test');
+  if (role == 'customer') {
+    const result = await prisma.order.findUnique({
+      where: {
+        id: orderId,
+        userId,
+      },
+      include: {
+        orderedBooks: {
+          select: {
+            bookId: true,
+            quantity: true,
+          },
+        },
+      },
+    });
+
+    if (result?.userId != userId) {
+      throw new ApiError(
+        httpStatus.FORBIDDEN,
+        'You Do not have any order with this order id'
+      );
+    }
+
+    return result;
+  } else if (role == 'admin') {
+    const result = await prisma.order.findUniqueOrThrow({
+      where: {
+        id: orderId,
+      },
+      include: {
+        orderedBooks: {
+          select: {
+            bookId: true,
+            quantity: true,
+          },
+        },
+      },
+    });
+    return result;
+  }
 };
 
 export const OrderService = {
   createOrder,
   getAllOrder,
-  getOrderById,
-  getOrderForCustomer,
+  getOrderByOrderId,
 };
