@@ -6,44 +6,9 @@
     "auditLog": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\.0befa89adaadf6dee52ae2e4c7ac4c419c08e8c4-audit.json",
     "files": [
         {
-            "date": 1695503803561,
-            "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-24-09-03-success.log",
-            "hash": "0a54e94c4b778b0ff77d82595c154c11db03e57e44667ba8613b4e1b38b13e08"
-        },
-        {
-            "date": 1695575662347,
-            "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-24-09-23-success.log",
-            "hash": "3462b361658a7ded2243ed6d5cd35a7ff1a7d28dfca1089a978864c22c1b789d"
-        },
-        {
-            "date": 1695582489840,
-            "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-25-09-01-success.log",
-            "hash": "62d00b32cd949982d4b48f9b75c852cf4165f145ef1dc3c7c802de945c1ba10d"
-        },
-        {
-            "date": 1695586002352,
-            "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-25-09-02-success.log",
-            "hash": "9dd1fb4f554847be674a8a4dec5c0b456fbb3efa25fac313233705b536de64be"
-        },
-        {
-            "date": 1695644800015,
-            "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-25-09-18-success.log",
-            "hash": "c5c9b9aa2a5476b99aba62480d4533e1df5d17afdce760060dd5e4bdb4d8a0e1"
-        },
-        {
-            "date": 1695646863643,
-            "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-25-09-19-success.log",
-            "hash": "b96fb232cfd8e87afd63b4aa622a21433dc286b8709ac94a06ce3c1f25811846"
-        },
-        {
-            "date": 1695671911168,
-            "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-26-09-01-success.log",
-            "hash": "d95954389fcefb5a7a86fd64fb16778e038a4b5c0211fc2946f7465be2cc4962"
-        },
-        {
-            "date": 1695673335700,
+            "date": 1695674832404,
             "name": "C:\\next-level\\Book-catalog-assignment-8\\logs\\winston\\successes\\phu-2023-26-09-02-success.log",
-            "hash": "36f0eb7db8b4294f25dd31272108bf6eed4250bf9cf150698b30f5fcad70a295"
+            "hash": "5487da855f2a2b9be269a5035fcb7b0d8cbc24fbdb1228b761469362a0e48063"
         }
     ],
     "hashType": "sha256"
