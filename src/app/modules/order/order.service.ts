@@ -12,7 +12,12 @@ const createOrder = async (
   user: IUser
 ): Promise<any> => {
   const { userId, role } = user;
+
   const { orderedBooks } = payload;
+
+  if (user) {
+    console.log('From order', user);
+  }
 
   if (role != 'customer') {
     throw new ApiError(
@@ -38,6 +43,7 @@ const createOrder = async (
         async (OrderedBookItem: IOrderedBook) => {
           const createOrderResult = await transactionClient.orderedBook.create({
             data: {
+              userId: user.userId,
               orderId: result.id,
               bookId: OrderedBookItem.bookId,
               quantity: OrderedBookItem.quantity,

@@ -80,9 +80,6 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 
   const { userId } = verifiedToken;
 
-  // case- user deleted but he has refresh token
-  // checking deleted user's refresh token
-
   const isUserExist = await prisma.users.findUnique({
     where: {
       id: userId,

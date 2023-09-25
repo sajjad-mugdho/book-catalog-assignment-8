@@ -69,13 +69,14 @@ model Order {
 }
 
 model OrderedBook {
-  id      String @id @default(uuid())
-  orderId String
-  bookId  String
+  id     String @id @default(uuid())
+  userId String
+  bookId String
 
   quantity Int
 
-  order Order @relation(fields: [orderId], references: [id])
+  Order   Order?  @relation(fields: [orderId], references: [id])
+  orderId String?
 }
 
 enum StatusOption {
