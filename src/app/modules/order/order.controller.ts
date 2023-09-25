@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { IUser } from '../../../interfaces/common';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { OrderService } from './order.service';
@@ -20,11 +21,15 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
   });
 });
 const getAllOrder = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderService.getAllOrder();
+  const user: IUser = (req as any).user;
+  console.log('USER', user);
+  console.log(req.cookies);
+
+  const result = await OrderService.getAllOrder(user);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Orders Retrives succsefully',
+    message: 'Orders retrieved successfully !',
     data: result,
   });
 });

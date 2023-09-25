@@ -78,10 +78,38 @@ const createOrder = async (
   throw new ApiError(httpStatus.BAD_REQUEST, 'Unable to create order');
 };
 
-const getAllOrder = async (): Promise<Order[]> => {
-  const result = await prisma.order.findMany({});
+const getAllOrder = async (user: IUser): Promise<any[]> => {
+  const { userId, role } = user;
+  console.log('service user', user);
 
-  return result;
+  if (role == 'customer') {
+    const result = await prisma.order.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        orderedBooks: {
+          select: {
+            bookId: true,
+            quantity: true,
+          },
+        },
+      },
+    });
+    return result;
+  } else {
+    const result = await prisma.order.findMany({
+      include: {
+        orderedBooks: {
+          select: {
+            bookId: true,
+            quantity: true,
+          },
+        },
+      },
+    });
+    return result;
+  }
 };
 const getOrderById = async (id: string): Promise<Order | null> => {
   const result = await prisma.order.findUnique({
