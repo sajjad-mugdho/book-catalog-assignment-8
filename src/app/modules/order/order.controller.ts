@@ -1,15 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { IUser } from '../../../interfaces/common';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { OrderService } from './order.service';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderService.createOrder(req.body);
+  //console.log(req.body)
+  const user: IUser = (req as any).user;
+  const result = await OrderService.createOrder(req.body, user);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Order created succsefully',
+    message: 'Order Fetched Successufully',
     data: result,
   });
 });
